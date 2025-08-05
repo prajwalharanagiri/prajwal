@@ -1,27 +1,17 @@
-document.getElementById('addTaskButton').addEventListener('click', function() {
-    const taskInput = document.getElementById('taskInput');
-    const taskText = taskInput.value.trim();
+function convertTemp(){
+    let temp = parseFloat(document.getElementById("temperature").value);
+    let unit = document.getElementById("unit").value;
+    let result = 0;
 
-    if (taskText !== "") {
-        const taskList = document.getElementById('taskList');
-        
-        // Create list item
-        const li = document.createElement('li');
-        li.textContent = taskText;
-        
-        // Create delete button
-        const deleteButton = document.createElement('button');
-        deleteButton.textContent = 'Delete';
-        
-        // Add delete functionality
-        deleteButton.addEventListener('click', function() {
-            li.remove();
-        });
-        
-        li.appendChild(deleteButton);
-        taskList.appendChild(li);
-        
-        // Clear input field
-        taskInput.value = "";
+    if(isNaN(temp)){
+        document.getElementById("result").innerText="Please Enter Valid Number";
+        return;
     }
-});
+    if(unit==="CtoF"){
+        result=(temp*9/5)+32;
+        document.getElementById("result").innerText=`${temp}°C = ${result.toFixed(2)}°F`;
+    }else{
+        result=(temp-32)*5/9;
+        document.getElementById("result").innerText=`${temp}°F = ${result.toFixed(2)}°C`;
+    }
+}
